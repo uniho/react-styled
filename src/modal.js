@@ -165,7 +165,7 @@ const Inner = props => {
 }
 
 //
-const scrollLock = lock => {
+export const scrollLock = lock => {
   if (lock) {
     const w = document.body.clientWidth
     document.body.style.overflow = 'hidden'
