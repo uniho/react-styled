@@ -122,32 +122,32 @@ const Inner = props => {
     color: 'grey',
     background: 'white',
     width: '100px', height: '100px',
-    // animationName: keyframes`
-    //   0% {
-    //     opacity: 0;
-    //     transform: scale3d(1.1, 1.1, 1);
-    //   }
-    //   100% { 
-    //     opacity: 1; 
-    //     transform: scale3d(1, 1, 1); 
-    //   }
-    // `,
-    // animationDuration: `${props.hideAnimeDuration}ms`,
-    // animationTimingFunction: 'cubic-bezier(.64,.09,.08,1)',
+    animationName: keyframes({
+      '0%': {
+        opacity: 0,
+        transform: 'scale3d(.7, .7, .7)',
+      },
+      '100%': { 
+        opacity: 1, 
+      }
+    }),
+    animationDuration: `${props.hideAnimeDuration}ms`,
+    animationTimingFunction: 'cubic-bezier(.64,.09,.08,1)',
   }, props.style)
 
   if (props.hide) {
     Object.assign(style, {
-      animationName: keyframes`
-        0% {
-          opacity: 1;
+      animationName: keyframes({
+        '0%': {
+          opacity: 1,
+        },
+        '100%': { 
+          opacity: 0,
+          transform: 'scale3d(.7, .7, .7)', 
         }
-        100% { 
-          opacity: 0;
-          transform: scale3d(0.9, 0.9, 1); 
-        }
-      `,
-      opacity: 0,
+      }),
+      animationDuration: `${props.hideAnimeDuration}ms`,
+      // opacity: 0,
     }, props.styleHide)
   }
 
