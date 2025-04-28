@@ -147,7 +147,7 @@ const Inner = props => {
         }
       }),
       animationDuration: `${props.hideAnimeDuration}ms`,
-      // opacity: 0,
+      opacity: 0, // ちらつき防止に念のため
     }, props.styleHide)
   }
 
