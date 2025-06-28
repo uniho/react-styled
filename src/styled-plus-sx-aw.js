@@ -3,7 +3,7 @@ import {styled, Styled, css, cx, keyframes} from 'modules/styled.js'
 import {Sx} from 'modules/styled-plus.js'
 
 //
-Sx.a = Styled('a', props => {
+Sx.aw = Styled('a', props => {
   const color = (props.hover && props.hover.color) || 'var(--style-palette-on-surface)';
   const bgcolor = (props.hover && props.hover.bgcolor) || 'rgb(var(--style-palette-on-surface-channel) / .3)';
 

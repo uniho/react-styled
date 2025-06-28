@@ -9,6 +9,7 @@ export const Sx = {
   flexCol: Styled('div', {display:'flex', flexDirection: 'column'}),
   inlineFlex: Styled('div', {display:'inline-flex'}),
   grid: Styled('div', {display:'grid'}),
+  a: Styled('a'),
   details: Styled('details'),
   button: Styled('button', props => asButtonStyle(props), {
     shouldForwardProp: key => !(['elevated', 'filled', 'outlined', 'float', 'tonal', 'unfocus']).includes(key) 
