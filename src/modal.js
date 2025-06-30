@@ -180,7 +180,7 @@ export const showDialogBox = (content, props = {}) => {
     maxWidth: '320px',
     height: 'auto',
     minHeight: '3em',
-    boxShadow: '4px 4px 16px rgba(0, 0, 0, 0.5)',
+    boxShadow: '4px 4px 16px rgb(0 0 0/.5)',
     padding: '1em',
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word', // これがないと長い URL などがはみ出る
