@@ -2,7 +2,7 @@
 import {styled, Styled, css, cx, keyframes} from 'modules/styled.js'
 import {Sx} from 'modules/styled-plus.js'
 
-//
+// Uncontrolled
 export const SwitchWithLabel = props => {
   const [state, setState] = React.useState(props.checked ? true : false);
   const handleChange = e => {
@@ -12,25 +12,27 @@ export const SwitchWithLabel = props => {
 
   const {children, ...others} = props;
 
-  return html`
-  <${Sx.div} className=${cx({disabled: props.disabled})} onClick=${handleChange} sx=${{
-    display: 'flex',
-    alignItems: 'center',
-    cursor: props.disabled ? 'not-allowed' : 'pointer',
-    '&:hover:not(&.disabled)': {
-      '.track': state ? {} : {
-        background: 'color-mix(in srgb, currentColor, #fff 25%)',
-        border: 'none',
+  return React.createElement(Sx.div, {
+    className: cx({disabled: props.disabled}),
+    onClick: handleChange,
+    sx: {
+      display: 'flex',
+      alignItems: 'center',
+      cursor: props.disabled ? 'not-allowed' : 'pointer',
+      '&:hover:not(&.disabled)': {
+        '.track': state ? {} : {
+          background: 'color-mix(in srgb, currentColor, #fff 25%)',
+          border: 'none',
+        },
       },
-    },
-  }}>
-    <${SwitchNode} ...${others} checked=${state} onChange=${handleChange} onClick=${e => e.stopPropagation()}/>
-    <${Sx.div} sx=${{marginLeft: '8px', opacity: props.disabled ? 0.38 : 1}}>${children}<//>
-  <//>
-  `;
+    }
+  }, [
+    React.createElement(SwitchNode, {...others, checked: state, onChange: handleChange, onClick: e => e.stopPropagation()}),
+    React.createElement(Sx.div, {sx: {marginLeft: '8px', opacity: props.disabled ? 0.38 : 1}}, children),
+  ]);
 };
 
-//
+// Uncontrolled
 export const Switch = props => {
   const [state, setState] = React.useState(props.checked ? true : false);
   const handleChange = e => {
@@ -38,12 +40,15 @@ export const Switch = props => {
     setState(prevState => !prevState);
   };
 
-  return html`
-  <${SwitchNode} ...${props} checked=${state} onChange=${handleChange} />
-  `;
+  return React.createElement(SwitchNode, {
+    ...props,
+    checked: state, 
+    onChange: handleChange,
+  });
 };
 
-const SwitchNode = props => {
+// Controlled
+export const SwitchNode = props => {
   return React.createElement(SwitchStyle,
     {
       sx: props.sx,
@@ -54,6 +59,7 @@ const SwitchNode = props => {
     React.createElement('div', {className: "thumb"}),
     React.createElement('input', {
       'type': "checkbox", 'aria-label': "switch",
+      ref: props.ref,
       checked: props.checked, disabled: props.disabled, onChange: props.onChange, onClick: props.onClick,
       readOnly: props.readOnly || (!props.onChange && !props.onClick)
     })
