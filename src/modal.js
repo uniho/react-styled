@@ -12,7 +12,7 @@ export const showModal = (content, props = {}) => {
     root.render(
       content ?
         React.createElement(Inner, {
-          hide: true, style: props.style, styleHide: props.styleHide, theme: props.theme, hideAnimeDuration,
+          hide: true, style: props.style, styleHide: props.styleHide, hideAnimeDuration,
         }, content) : null,
     );
     
@@ -31,7 +31,7 @@ export const showModal = (content, props = {}) => {
   body.appendChild(subRoot)
   const root = ReactDOMClient.createRoot(subRoot)
   root.render(
-    content ? React.createElement(Inner, {style: props.style, theme: props.theme, close, hideAnimeDuration}, content)
+    content ? React.createElement(Inner, {style: props.style, close, hideAnimeDuration}, content)
       : null
   )
   if (props.hideOnClick !== false) subRoot.onclick = close
@@ -119,8 +119,8 @@ const Inner = props => {
   }, [])
 
   const style = Object.assign({
-    color: 'grey',
-    background: 'white',
+    color: 'var(--style-palette-on-surface)',
+    background: 'var(--style-palette-surface-container-high)',
     width: '100px', height: '100px',
     animationName: keyframes({
       '0%': {
@@ -153,13 +153,6 @@ const Inner = props => {
 
   const newChildren = React.isValidElement(props.children) ?
     React.cloneElement(props.children, {close: props.close}) : props.children;
-
-  /* if (props.theme) {
-    return React.createElement(MaterialUI.CssVarsProvider, Style.getColorScheme(props.theme), 
-      React.createElement(MaterialUI.CssBaseline, {enableColorScheme: true}),
-      React.createElement(MaterialUI.styled('div')(style), {ref, onKeyDown:handleKeyDown}, newChildren),
-    );
-  } */
 
   return React.createElement(styled('div')(style), {ref, onKeyDown:handleKeyDown}, newChildren);
 }
