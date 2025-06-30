@@ -52,13 +52,13 @@ const Inner = props => {
   const style = Object.assign({
     display: 'flex',
     flexDirection: 'column',
-    color: 'grey',
+    color: 'var(--style-palette-inverse-on-surface)',
     width: '100%',
     borderRadius: '4px',
     borderWidth: 0,
     boxShadow: '4px 4px 16px rgb(0 0 0/.5)',
     // padding: '1em',
-    background: 'white',
+    background: 'var(--style-palette-inverse-surface)',
     opacity,
     animationName: keyframes`
       0% { transform: translateY(calc(-100% - 16px)); opacity: 0; }
