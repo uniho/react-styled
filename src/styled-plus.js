@@ -12,67 +12,8 @@ export const Sx = {
   a: Styled('a'),
   details: Styled('details'),
   button: Styled('button', props => asButtonStyle(props), {
-    shouldForwardProp: key => !(['elevated', 'filled', 'outlined', 'float', 'tonal', 'unfocus']).includes(key) 
+    shouldForwardProp: key => !(['elevated', 'filled', 'outlined', 'tonal', 'round', 'icon', 'unfocus']).includes(key) 
   }),
-};
-
-// deprecated
-export const asButtonStyleOrg = props => {
-  props = props || {};
-  const isDefault = ('default' in props) && !props.disabled;
-  const style = {
-    borderRadius: isDefault ? '2px' : 0,
-    boxShadow: isDefault ? '0 2px 5px 0 rgb(0 0 0/.14), 0 2px 10px 0 rgb(0 0 0/.1)' : 'none',
-    padding: '8px 16px',
-  };
-  if (props.float) {
-    style.width = '64px';
-    style.height = '64px';
-    style.borderRadius = '50%';
-    style.boxShadow = '0 2px 5px 0 rgb(0 0 0/.14), 0 2px 10px 0 rgb(0 0 0/.1)';
-    style.padding = '0';
-  }
-
-  const color = props.color || 'var(--style-palette-on-primary)';
-  const bgcolor = props.bgcolor || 'var(--style-palette-primary)';
-  const borderColor = 'var(--style-palette-outline)';
-
-  return [css`
-    position: relative;
-    background-image: none;
-    //background-size: 0;
-    //background-repeat: no-repeat;
-    //background-position: 50% 50%;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    /*font-family: Roboto;*/
-
-    color: ${isDefault || props.float ? color : 'inherit'};
-    background-color: ${('default' in props) || props.float ? bgcolor : 'inherit'};
-    border: ${props.outlined ? `solid 1px ${borderColor}` : 'none'};
-    transition: background-image .3s ease-out, box-shadow .3s ease-out;
-    will-change: background-image, box-shadow;
-
-    // タッチデバイスなら hover アニメーションはしないようにする
-    // そうしないと、タッチ後に hover の状態で描画されたままてなってしまうため
-    @media (hover: hover) and (pointer: fine) {
-      &:hover:not(:disabled):not(:active), &:focus-visible {
-        ${props.mode === 'dark' ? 
-          `background-image: ${darkElevation(false, 3)};` : 
-          `box-shadow: var(--style-shadows-5);`
-        }
-      }
-    }
-
-    &:active:not(:disabled) {
-      box-shadow: none;
-    }
-
-  `, 
-  style,
-  props.disabled ? {opacity: 0.38} : {cursor: 'pointer'}];
 };
 
 // active については、標準仕様より変化量を多めにした
@@ -210,17 +151,23 @@ export const asButtonStyle = props => {
       disabled.borderColor = 'var(--style-palette-on-surface)';
   }
 
-  if (props.float) {
-    if (!propsStyle.base.minWidth)
-      style.minWidth = '64px';
-    if (!propsStyle.base.maxWidth)
-      style.maxWidth = '64px';
-    if (!propsStyle.base.height)
-      style.height = '64px';
-    if (!propsStyle.base.borderRadius)
-      style.borderRadius = '50%';
-    if (!propsStyle.base.padding)
-      style.padding = '0';
+  if (!propsStyle.base.borderRadius) {
+    // square(default)
+    style.borderRadius = '12px'; // S の場合
+    if (props.round) style.borderRadius = '9999px';
+  }
+  if (!propsStyle.active.borderRadius) {
+    // square(default)
+    active.borderRadius = '8px'; // S の場合
+  }
+
+
+  // Icon Button
+  if (props.icon) {
+    style.height = propsStyle.base.height || '40px';
+    style.minWidth = style.height;
+    style.maxWidth = style.height;
+    if (!propsStyle.base.padding) style.padding = '0';
   }
 
   return [
