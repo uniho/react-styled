@@ -67,23 +67,17 @@ export const asButtonStyle = props => {
     if (!propsStyle.base.backgroundColor)
       style.backgroundColor = 'var(--style-palette-surface-container-low)';
     if (!propsStyle.base.boxShadow) 
-      style.boxShadow = 'var(--style-shadows-2)'; // Level1 = 1dp
+      style.boxShadow = 'var(--style-shadows-level1)';
     if (!propsStyle.hover.border)
       hover.border = 'none';
-    // if (!propsStyle.hover.backgroundColor) 
-    //   hover.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-primary) 8%)`;
     if (!propsStyle.hover.boxShadow)
-      // hover.boxShadow = 'var(--style-shadows-6)'; // Level2 = 3dp
-      // hover.boxShadow = 'var(--style-shadows-6), 0 0 4px color-mix(in srgb, var(--style-palette-on-surface) 50%, transparent)';
-      hover.boxShadow = `var(--style-shadows-6), 0 0 0 1px ${style.backgroundColor}`;
+      hover.boxShadow = `var(--style-shadows-level2), 0 0 0 1px ${style.backgroundColor}`;
     if (!propsStyle.focus.backgroundColor)
       focus.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-primary) 10%)`;
     if (!propsStyle.active.backgroundColor)
       active.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-primary) 20%)`;
     if (!propsStyle.active.boxShadow)
       active.boxShadow = 'none';
-    // if (!propsStyle.disabled.backgroundColor)
-    //   disabled.backgroundColor = 'rgb(var(--style-palette-on-surface-channel) /.12)';
   }
   if (props.filled) {
     if (!propsStyle.base.border)
@@ -99,8 +93,6 @@ export const asButtonStyle = props => {
     if (!propsStyle.hover.backgroundColor)
       hover.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-on-primary) 8%)`;
     if (!propsStyle.hover.boxShadow)
-      // hover.boxShadow = 'var(--style-shadows-2)'; // Level1 = 1dp
-      // hover.boxShadow = 'var(--style-shadows-2), 0 0 4px var(--style-palette-on-surface)';
       hover.boxShadow = `0 0 0 1px ${style.backgroundColor}`;
     if (!propsStyle.focus.backgroundColor)
       focus.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-on-primary) 10%)`;
@@ -123,8 +115,6 @@ export const asButtonStyle = props => {
     if (!propsStyle.hover.backgroundColor)
       hover.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-on-secondary-container) 8%)`;
     if (!propsStyle.hover.boxShadow)
-      // hover.boxShadow = 'var(--style-shadows-2)'; // Level1 = 1dp
-      // hover.boxShadow = 'var(--style-shadows-2), 0 0 4px var(--style-palette-on-surface)';
       hover.boxShadow = `0 0 0 1px ${style.backgroundColor}`;
     if (!propsStyle.focus.backgroundColor)
       focus.backgroundColor = `color-mix(in srgb, ${style.backgroundColor}, var(--style-palette-on-secondary-container) 10%)`;
@@ -142,10 +132,7 @@ export const asButtonStyle = props => {
       style.color = 'var(--style-palette-primary)';
     if (!propsStyle.base.backgroundColor)
       style.backgroundColor = 'inherit';
-    // if (!propsStyle.hover.backgroundColor)
-    //   hover.backgroundColor = 'color-mix(in srgb, currentColor 8%, transparent)';
     if (!propsStyle.hover.boxShadow)
-      // hover.boxShadow = `0 2px 4px 0 var(--style-palette-outline), 0 2px 6px 0 var(--style-palette-outline)`;
       hover.boxShadow = `0 0 0 1px var(--style-palette-outline)`;
     if (!propsStyle.disabled.backgroundColor)
       disabled.borderColor = 'var(--style-palette-on-surface)';
@@ -221,52 +208,6 @@ export const hexToRgbRaw = (hex) => {
     parseInt(result[2], 16),
     parseInt(result[3], 16),
   ];
-}
-
-// deprecated
-// https://m2.material.io/design/color/dark-theme.html#properties
-export const darkElevation = (base = false, dp = 0) => {
-  if (!dp) {
-    if (base === false) {
-      return 'none';
-    }
-    return base;
-  }
-  const transparency = getElevationTansparency(dp);
-  if (base === false) {
-    return `linear-gradient(rgb(255 255 255/${transparency}), rgb(255 255 255/${transparency}))`;
-  }
-  const rgb = hexToRgbRaw(base);
-  rgb[0] += parseInt((0xff - rgb[0]) * transparency);
-  rgb[1] += parseInt((0xff - rgb[1]) * transparency);
-  rgb[2] += parseInt((0xff - rgb[2]) * transparency);
-  return rgbToHex(rgb[0], rgb[1], rgb[2]);
-}
-
-// deprecated
-export const lightElevation = (base = false, dp = 0) => {
-  if (!dp) {
-    if (base === false) {
-      return 'none';
-    }
-    return base;
-  }
-  const transparency = getElevationTansparency(dp);
-  if (base === false) {
-    return `linear-gradient(rgb(255 255 255/${transparency}), rgb(255 255 255/${transparency}))`;
-  }
-  const rgb = hexToRgbRaw(base);
-  rgb[0] += parseInt(rgb[0] + rgb[0] * transparency);
-  rgb[1] += parseInt(rgb[1] + rgb[1] * transparency);
-  rgb[2] += parseInt(rgb[2] + rgb[2] * transparency);
-  return rgbToHex(rgb[0], rgb[1], rgb[2]);
-}
-
-const getElevationTansparency = (dp = 0) => {
-  if (!dp) {
-    return 0;
-  }
-  return ((4.5 * Math.log(dp + 1)) + 2) / 100;
 }
 
 // Convert colors in RGB format to Hex format.
