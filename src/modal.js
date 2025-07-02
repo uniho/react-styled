@@ -25,8 +25,8 @@ export const showModal = (content, props = {}) => {
 
   scrollLock(true)
   const subRoot = document.createElement('div')
-  subRoot.style = 'position: fixed; z-index: 1; top: 0; left: 0; ' +
-    'width:100vw; height:100vh; height:100dvh; ' + props.cssModal 
+  subRoot.style = (props.noScrim ? '' : 'background: rgb(0 0 0/.32); ') +
+   'position: fixed; z-index: 1; top: 0; left: 0; width:100vw; height:100vh; height:100dvh; ' + props.cssModal; 
   const body = document.querySelector('body')
   body.appendChild(subRoot)
   const root = ReactDOMClient.createRoot(subRoot)
@@ -174,14 +174,14 @@ export const scrollLock = lock => {
 //
 export const showDialogBox = (content, props = {}) => {
   props.style = Object.assign({
-    borderRadius: '5px',
+    borderRadius: '28px',
     borderWidth: 0,
     width: '90%',
     maxWidth: '320px',
     height: 'auto',
-    minHeight: '3em',
-    boxShadow: '4px 4px 16px rgb(0 0 0/.5)',
-    padding: '1em',
+    minHeight: '24px',
+    // boxShadow: '4px 4px 16px rgb(0 0 0/.5)',
+    padding: '24px',
     whiteSpace: 'pre-wrap',
     wordWrap: 'break-word', // これがないと長い URL などがはみ出る
   }, (props && props.style) || {})
