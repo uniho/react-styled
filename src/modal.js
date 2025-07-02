@@ -25,8 +25,8 @@ export const showModal = (content, props = {}) => {
 
   scrollLock(true)
   const subRoot = document.createElement('div')
-  subRoot.style = (props.noScrim ? '' : 'background: rgb(0 0 0/.32); ') +
-   'position: fixed; z-index: 1; top: 0; left: 0; width:100vw; height:100vh; height:100dvh; ' + props.cssModal; 
+  subRoot.style = (typeof props.scrim === "string" || props.scrim instanceof String ? props.scrim : 'background: rgb(0 0 0/.32);') +
+   ' position: fixed; z-index: 1; top: 0; left: 0; width:100vw; height:100vh; height:100dvh; ' + props.cssModal; 
   const body = document.querySelector('body')
   body.appendChild(subRoot)
   const root = ReactDOMClient.createRoot(subRoot)
