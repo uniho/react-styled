@@ -157,6 +157,14 @@ export const asButtonStyle = props => {
     if (!propsStyle.base.padding) style.padding = '0';
   }
 
+  // FAB Button
+  if (props.float) {
+    if (!propsStyle.base.boxShadow)  
+      style.boxShadow = 'var(--style-shadows-level3)';
+    if (!propsStyle.hover.boxShadow)
+      hover.boxShadow = `var(--style-shadows-level4)`;
+  }
+
   return [
     css`
       //position: relative;
