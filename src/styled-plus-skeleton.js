@@ -16,9 +16,10 @@ export const skeletonStyle = props => {
       left: 0,
       right: 0,
 
-      background: animation === 'wave' ? `linear-gradient(90deg, transparent, ${color}, transparent)` : `linear-gradient(110deg, transparent 8%, ${color} 18%, transparent 33%)`,
+      // https://cssgradient.io/
+      background: animation === 'wave' ? `linear-gradient(90deg, transparent, ${color}, transparent)` : `linear-gradient(110deg, transparent 10%, ${color} 28%, transparent 46%)`,
       animation: animation === 'wave' ? `${wave} 1.6s linear 0.5s infinite` : `1.5s ${shine} linear infinite`,
-      // transform: animation === 'wave' ? 'translateX(-100%)' : 'none',
+      transform: animation === 'wave' ? 'translateX(-100%)' : 'none',
       backgroundSize: animation === 'wave' ? 'auto auto' : '200% 100%',
     }
   };
