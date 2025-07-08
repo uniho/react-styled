@@ -2,7 +2,7 @@
 import {keyframes} from 'modules/styled.js'
 
 export const skeletonStyle = props => {
-  const color = props?.color || 'var(--style-palette-surface-container-high)';
+  const color = props?.color || 'var(--style-palette-surface-bright)';
   const animation = props?.animation;
 
   const style = {
